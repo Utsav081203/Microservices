@@ -1,0 +1,67 @@
+**Microservices Architecture**
+
+What will be implemented in MicroServices: 
+Basically, Post creation, comment creation and display is supported here.
+
+This would be implemented in Node and React.
+
+How many services should we create?
+One Service for each resource.
+
+Resources: Posts and Comments.
+Thus, two services will be created for them.
+
+Posts Service
+--->Create a Post
+--->List all Posts
+
+Comments Service
+--->Create a comment
+--->List all comments
+
+React--->Posts Service
+|
+|
+|
+v
+Comments Service
+
+React application will communicate with Posts and Comments services.
+
+React will handle frontend while express is used for writing microservices.
+
+Client-->Frontend Logic.
+Posts, Comments-->Services Logic.
+
+Posts Service:
+Method: POST, Path: /posts, Body: {title: String}, Goal: Create a new post
+Method: GET, Path: /posts, Body: -, Goal: Retrieve all posts
+
+Comments Service:
+Method: POST, Path: /posts/:id/comments, Body: {content: String}, Goal: Create a new comment associated with post of given id
+Method: GET, Path: /posts/:id/comments, Body: -, Goal: Retrieve all comments associated with post of given id
+
+Data Structure:
+[keys of post id] mapped to list of comments where each item is of form: [id_of_comment, content_of_comment]
+
+In an Express.js application, app.listen() is crucial for starting your server and making it capable of handling incoming HTTP requests.
+app.listen() binds and listens for connections on the specified host and port. Without this, your Express app will not start the HTTP server, so it cannot accept requests.
+
+React application logic:
+PostList: render posts and comments on bottom half of the page.
+Inside each post in post list, we have to display title of post followed by comments list followed by form for comment addition.
+PostCreate: upper half will have form to create post.
+
+Monolithic Architecture:
+Developed as a single unit. Single code base/file for all functionalitites like auth, crud and many more.
+Deployed as a single unit too. Thus only one CI/CD pipeline.
+Thus simple change in one functionality leads to re deployment.
+Scaling one functionality is difficult.
+Lot of Dependence.
+
+Microservices Architecture:
+Bifuracted into different services like auth, payment, crud, etc...
+Independently developed, codebase, scaled, deployed
+They are loosely coupled
+Technology Flexibility
+Each Service has API endpoint, synchronization is done through APIs
